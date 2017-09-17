@@ -1,7 +1,7 @@
-# Class website-02
+# Class website02
 #
 
-class website-02 {
+class website02 {
 
     file { '/var/www/html/index.html':
       ensure        => 'present',
