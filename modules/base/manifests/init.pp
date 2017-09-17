@@ -31,6 +31,14 @@ class base {
       source        => ['puppet:///modules/base/demo_1/demo-website.html'],
       notify        => Service['nginx'], # Restart nginx server if being updated
     }
+    file { '/var/www/html/images':
+      ensure        => directory,
+      notify        => Service['nginx'], # Restart nginx server if being updated
+    }
+    file { '/var/www/html/images/ny-sidewalk.jpg':
+      ensure        => present,
+      notify        => Service['nginx'], # Restart nginx server if being updated
+    }
   }
   elsif $facts['hostname'] == 'agent-02' {
 
