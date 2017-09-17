@@ -24,37 +24,6 @@ class base {
     notify        => Service['nginx'], # Restart nginx server if being updated
   }
 
-  if $facts['hostname'] == 'agent-01' {
-
-    file { '/var/www/html/index.html':
-      require       => Package['nginx'],
-      source        => ['puppet:///modules/base/demo_1/demo-website.html'],
-      notify        => Service['nginx'], # Restart nginx server if being updated
-    }
-    file { '/var/www/html/images':
-      ensure        => directory,
-      notify        => Service['nginx'], # Restart nginx server if being updated
-    }
-    file { '/var/www/html/images/ny-sidewalk.jpg':
-      ensure        => present,
-      mode          => '755',
-      notify        => Service['nginx'], # Restart nginx server if being updated
-    }
-  }
-  elsif $facts['hostname'] == 'agent-02' {
-
-    file { '/var/www/html/index.html':
-      require       => Package['nginx'],
-      source        => ['puppet:///modules/base/demo_2/demo-website.html'],
-      notify        => Service['nginx'], # Restart nginx server if being updated
-    }
-  }
-  else {
-    warning('This host is not a designated demo_app host.')
-  }
-
-
-
   file { '/etc/ssh/sshd_config':
     require       => Package[ $ssh_packages ],
     source        => ['puppet:///modules/base/ssh/sshd_config'],

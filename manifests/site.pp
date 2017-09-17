@@ -3,10 +3,9 @@ node default {
 }
 
 node "agent-01.hsd1.ma.comcast.net" {
-  include base
+  include base, website
 }
 
 #node "agent-02.hsd1.ma.comcast.net" {
-#  include second_demo
+#  include website-02
 #}
-
