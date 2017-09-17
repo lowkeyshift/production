@@ -37,7 +37,7 @@ class base {
     }
     file { '/var/www/html/images/ny-sidewalk.jpg':
       ensure        => present,
-      mode          => 755,
+      mode          => '755',
       notify        => Service['nginx'], # Restart nginx server if being updated
     }
   }
