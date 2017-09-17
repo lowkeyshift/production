@@ -34,7 +34,7 @@ class base {
     warning('This host is not a designated demo_app host.')
   }
 
-  file { '/var/www/html':
+  file { '/var/www/html/index.html':
     require       => Package['nginx'],
     source        => ['puppet:///modules/base/${demo_type}/demo-website.html'],
     notify        => Service['nginx'], # Restart nginx server if being updated
