@@ -8,7 +8,7 @@ class website02 {
       owner         => 'www-data',
       group         => 'www-data',
       mode          => '0640',
-      source        => ['puppet:///modules/website/demo_2/demo-website.html'],
+      source        => ['puppet:///modules/website02/demo_2/demo-website.html'],
       notify        => Service['nginx'], # Restart nginx server if being updated
     }
 }
