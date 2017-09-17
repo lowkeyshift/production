@@ -36,7 +36,7 @@ class base {
 
   file { '/var/www/html':
     require       => Package['nginx'],
-    source        => ['puppet:///modules/base/$demo_type/demo-website.html'],
+    source        => ['puppet:///modules/base/${demo_type}/demo-website.html'],
     notify        => Service['nginx'], # Restart nginx server if being updated
   }
 
