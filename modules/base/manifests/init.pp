@@ -11,16 +11,32 @@ class base {
   package { $base_packages: }
   package { 'nginx': }
 
-  File { 
+  File {
     ensure        => 'present',
-    owner         => 'root',
-    group         => 'root',
+    owner         => 'www-data',
+    group         => 'www-data',
     mode          => '0640',
   }
 
   file { '/etc/nginx/sites-available/default':
     require       => Package['nginx'],
     content       => epp('base/nginx/default.epp'),
+    notify        => Service['nginx'], # Restart nginx server if being updated
+  }
+
+  if $facts['hostname'] == 'agent-01' {
+    $demo_type = 'demo_1'
+  }
+  elsif $facts['hostname'] == 'agent-02' {
+    $demo_type = 'demo_2'
+  }
+  else {
+    warning('This host is not a designated demo_app host.')
+  }
+
+  file { '/var/www/html':
+    require       => Package['nginx'],
+    source        => ['puppet:///modules/base/$demo_type/demo-website.html'],
     notify        => Service['nginx'], # Restart nginx server if being updated
   }
 
