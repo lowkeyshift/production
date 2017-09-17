@@ -25,20 +25,26 @@ class base {
   }
 
   if $facts['hostname'] == 'agent-01' {
-    $demo_type = 'demo_1'
+
+    file { '/var/www/html/index.html':
+      require       => Package['nginx'],
+      source        => ['puppet:///modules/base/demo_1/demo-website.html'],
+      notify        => Service['nginx'], # Restart nginx server if being updated
+    }
   }
   elsif $facts['hostname'] == 'agent-02' {
-    $demo_type = 'demo_2'
+
+    file { '/var/www/html/index.html':
+      require       => Package['nginx'],
+      source        => ['puppet:///modules/base/demo_2/demo-website.html'],
+      notify        => Service['nginx'], # Restart nginx server if being updated
+    }
   }
   else {
     warning('This host is not a designated demo_app host.')
   }
 
-  file { '/var/www/html/index.html':
-    require       => Package['nginx'],
-    source        => ['puppet:///modules/base/${demo_type}/demo-website.html'],
-    notify        => Service['nginx'], # Restart nginx server if being updated
-  }
+
 
   file { '/etc/ssh/sshd_config':
     require       => Package[ $ssh_packages ],
