@@ -5,7 +5,7 @@ class base {
   $base_packages = ['openssh-client', 'openssh-server']
 
   Package {
-    ensure        => present,
+    ensure => present,
   }
 
   package { $base_packages: }
